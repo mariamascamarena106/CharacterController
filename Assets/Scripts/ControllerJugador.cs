@@ -79,7 +79,7 @@ public class ControllerJugador : MonoBehaviour
         Vector2 entrada = mover.ReadValue<Vector2>();
 
         //Calcula dirección de mov.
-        Vector2 direccion = transform.right * entrada.x + transform.forward * entrada.y;
+        Vector3 direccion = transform.right * entrada.x + transform.forward * entrada.y;
 
 
         direccion = Vector3.ClampMagnitude(direccion, 1f);
