@@ -15,6 +15,7 @@ public class ControllerJugador : MonoBehaviour
     [SerializeField] private float gravedad = -20;
 
     private float VelocidadVertical;
+    private float inclinacion;
 
     private CharacterController controlador;
 
@@ -57,6 +58,17 @@ public class ControllerJugador : MonoBehaviour
 
     void GirarCamara()
     {
+        // obtener delta del raton
+        Vector2 delta = mirar.ReadValue<Vector2>();
+
+        transform.Rotate(Vector3.up * delta.x);
+
+
+        inclinacion -= delta.y;
+
+        inclinacion = Mathf.Clamp(inclinacion, -80f, 80f);
+
+        pivoteCamara.localRotation = Quaternion.Euler(inclinacion, 0f, 0f);
 
     }
 
