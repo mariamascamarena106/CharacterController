@@ -8,14 +8,24 @@ public class ControllerJugador : MonoBehaviour
     [SerializeField] private Transform pivoteCamara;
     [SerializeField] private GameObject modelo;
     [SerializeField] private Camera camara;
+    [SerializeField] private GameObject ojo;
 
     [Header("Movimiento")]
     [SerializeField] private float velocidad;
     [SerializeField] private float alturaSalto = 1.5f;
     [SerializeField] private float gravedad = -20;
+    [SerializeField] private float sensibilidadMouse = 0.12f;
+    [SerializeField] private float suavizado = 10f;
+
+    [Header("Cámara")]
+    [SerializeField] private Vector3 TerceraPos = new Vector3(0.65f, 0.15f, -3f);
+    [SerializeField] private Vector3 ApuntadoPos = new Vector3(0.55f, 0.1f, -1.7f);
+
 
     private float VelocidadVertical;
     private float inclinacion;
+
+    private bool primeraPers = false;
 
     private CharacterController controlador;
 
@@ -50,6 +60,13 @@ public class ControllerJugador : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (cambVista.WasCompletedThisFrame())
+        {
+            primeraPers = !primeraPers;
+            ojo.SetActive(!primeraPers);
+        }
+
         GirarCamara();
         MoverPersonaje();
         ActualilzarCamara();
@@ -61,10 +78,10 @@ public class ControllerJugador : MonoBehaviour
         // obtener delta del raton
         Vector2 delta = mirar.ReadValue<Vector2>();
 
-        transform.Rotate(Vector3.up * delta.x);
+        transform.Rotate(Vector3.up * delta.x * sensibilidadMouse);
 
 
-        inclinacion -= delta.y;
+        inclinacion -= (delta.y * sensibilidadMouse);
 
         inclinacion = Mathf.Clamp(inclinacion, -80f, 80f);
 
@@ -110,8 +127,28 @@ public class ControllerJugador : MonoBehaviour
     void ActualilzarCamara()
     {
 
+        Vector3 destino = Vector3.zero;
+
+        if (!primeraPers)
+        {
+            destino = TerceraPos;
+        }
+       
+
+        camara.transform.localPosition = Vector3.Lerp(
+            camara.transform.localPosition,
+            destino,
+            suavizado * Time.deltaTime);
+
     }
 
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if(hit.gameObject.tag == "Castañas")
+        {
+            Destroy(hit.gameObject);
+        }
+    }
 
 
 }
