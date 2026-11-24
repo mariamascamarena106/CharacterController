@@ -2268,7 +2268,6 @@ GameObject:
   - component: {fileID: 3451199727041236538}
   - component: {fileID: 6387660250459645832}
   - component: {fileID: 5281285021464923760}
-  - component: {fileID: 7087484291897541714}
   m_Layer: 0
   m_Name: "Casta\xF1as"
   m_TagString: "Casta\xF1as"
@@ -2745,18 +2744,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7087484291897541714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 790636838891276432}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c2fa88d2f2da1e47bab62905e36bfce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: "Assembly-CSharp::MuerteCasta\xF1as"
 --- !u!1 &7225558812659501310
 GameObject:
   m_ObjectHideFlags: 0

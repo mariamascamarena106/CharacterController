@@ -17,7 +17,7 @@ public class MuerteCastañas : MonoBehaviour
 
      private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if(hit.gameObject.tag == "Bala")
+        if(hit.gameObject.tag == "Castañas")
         {
             Destroy(hit.gameObject);
         }
